@@ -22,7 +22,7 @@ function App() {
   const [user, setUser] = useState({ isLoading: true, isLoggedIn: false });
   useEffect(() => {
     getAuth().onAuthStateChanged(function (firebaseUser) {
-      console.log(firebaseUser);
+     
       setUser({
         ...firebaseUser,
         isLoading: false,

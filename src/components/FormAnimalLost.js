@@ -29,7 +29,7 @@ function FormAnimalLost({ onSave }) {
   const selectedType = watch("tipo");
   const location = useLocation();
   const history = useHistory();
-  console.log(breeds);
+  
 
   React.useEffect(() => {
     setIsOpen(location.pathname === "/app/new-report");
