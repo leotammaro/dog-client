@@ -5,7 +5,7 @@ import { addDownloadURL } from "../service/getImagesFromStorage";
 import L from "leaflet";
 import MarkerIcon from "../assets/marker.svg";
 
-function DogMapData({ reportResult, hoverId }) {
+function AnimalMapData({ reportResult, hoverId }) {
   const markerIcon = L.icon({
     iconUrl: MarkerIcon,
     iconSize: [38, 95],
@@ -24,17 +24,21 @@ function DogMapData({ reportResult, hoverId }) {
       }, []);
   }, [reportResult]);
 
+  const reportData = () => {
+    window.open(`/report/${reportResult._id}`, "_blank");
+  };
+
   return (
     <>
       {reportResult && (
-        <Box>
+        <Box onClick={reportData}>
           <Marker
             position={reportResult.location.loc.coordinates}
             icon={markerIcon}
-            opacity={hoverId == reportResult._id ? 1 : 0.6}
+            opacity={hoverId === reportResult._id ? 1 : 0.6}
           >
             <Popup onOpen={loadImage}>
-              <Box w={150}>
+              <Box w={150} _hover={{ cursor: "pointer" }}>
                 {!src ? <Spinner /> : <Image src={src} objectFit="contain" />}
                 <Text fontSize={20} textTransform={"capitalize"}>
                   {reportResult.description}
@@ -48,4 +52,4 @@ function DogMapData({ reportResult, hoverId }) {
   );
 }
 
-export default DogMapData;
+export default AnimalMapData;

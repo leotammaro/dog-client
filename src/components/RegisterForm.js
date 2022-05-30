@@ -33,7 +33,6 @@ function RegisterForm() {
         style={{ display: "contents" }}
       >
         <Grid templateColumns="1fr" rowGap="20px" marginBottom="20px">
-          <InputRegister type="name" errors={methods.formState.errors} />
           <InputRegister type="email" errors={methods.formState.errors} />
           <InputRegister type="password" errors={methods.formState.errors} />
         </Grid>

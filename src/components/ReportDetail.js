@@ -73,24 +73,32 @@ function ReportDetail() {
     <>
       {!loading && src !== "" ? (
         <Stack
-          boxShadow="0px 0px 35px 2px rgba(0,0,0,0.15)"
-          direction="row"
+          boxShadow={{ base: "", lg: "0px 0px 35px 2px rgba(0,0,0,0.15)" }}
+          direction={{ base: "column", lg: "row" }}
           divider={<StackDivider />}
-          h={600}
+          h={{ base: 700, lg: 500 }}
+          justifyContent="space-between"
+          padding={5}
         >
-          <Image src={src} w={600} objectFit="cover" paddingRight={10} />
+          <Image
+            src={src}
+            w={{ base: 400, md: 500, lg: 500 }}
+            objectFit="cover"
+            paddingRight={{ base: 0, lg: 10 }}
+          />
           <Flex
             direction={"column"}
             alignItems="center"
             justifyContent={"space-around"}
-            w={600}
-            padding={10}
+            padding={{ base: 0, lg: 10 }}
             textAlign="center"
+            gridGap={5}
+            marginTop={{ base: 10, lg: 0 }}
           >
             <Text
               alignSelf={"center"}
               fontWeight="bold"
-              fontSize={9}
+              fontSize={{ base: 16, lg: 9 }}
               textTransform="uppercase"
               paddingBottom={5}
             >
@@ -104,13 +112,15 @@ function ReportDetail() {
             >
               <Text
                 textTransform="capitalize"
-                fontSize={30}
-                fontWeight="600"
-                flex={0.4}
+                fontSize={{ base: 18, lg: 30 }}
+                fontWeight="500"
+                flex={{ base: 1, lg: 0.4 }}
               >
                 {reportData.pet.type} - {reportData.pet.breed}
               </Text>
-              <Text flex={0.4}>{reportData.description}</Text>
+              <Text flex={0.4} display={{ base: "none", lg: "block" }}>
+                {reportData.description}
+              </Text>
             </Flex>
             <Flex direction={"column"} gridGap={4} w="100%">
               <Flex justifyContent={"space-around"}>
@@ -123,7 +133,9 @@ function ReportDetail() {
                   >
                     Calle
                   </Text>
-                  <Text fontSize={20}>{reportData.location.street}</Text>
+                  <Text fontSize={{ base: 14, lg: 20 }}>
+                    {reportData.location.street}
+                  </Text>
                 </Box>
                 <Box flex={0.4}>
                   <Text
@@ -134,7 +146,10 @@ function ReportDetail() {
                   >
                     Ciudad
                   </Text>
-                  <Text fontSize={20} textTransform="capitalize">
+                  <Text
+                    fontSize={{ base: 14, lg: 20 }}
+                    textTransform="capitalize"
+                  >
                     {reportData.location.city}
                   </Text>
                 </Box>
@@ -149,7 +164,10 @@ function ReportDetail() {
                   >
                     Tamaño
                   </Text>
-                  <Text fontSize={20} textTransform="capitalize">
+                  <Text
+                    fontSize={{ base: 14, lg: 20 }}
+                    textTransform="capitalize"
+                  >
                     {reportData.pet.size}
                   </Text>
                 </Box>
@@ -162,13 +180,19 @@ function ReportDetail() {
                   >
                     Genero
                   </Text>
-                  <Text fontSize={20} textTransform="capitalize">
+                  <Text
+                    fontSize={{ base: 14, lg: 20 }}
+                    textTransform="capitalize"
+                  >
                     {reportData.pet.gender}
                   </Text>
                 </Box>
               </Flex>
             </Flex>
 
+            <Text fontSize={{ base: 16, lg: 20 }} fontWeight="500">
+              Contactate!
+            </Text>
             <Flex w="100%" justifyContent={"center"} gridGap={8}>
               <Tooltip hasArrow label={reportData.phoneNumber} fontSize="md">
                 <PhoneIcon />
@@ -186,78 +210,4 @@ function ReportDetail() {
     </>
   );
 }
-/*
-<Flex w="100%" justifyContent={"space-around"}>
-              <Flex direction={"column"} flex={0.4}>
-                <Box>
-                  <Text
-                    color={"gray.500"}
-                    fontWeight="600"
-                    textTransform={"uppercase"}
-                    fontSize={11}
-                  >
-                    Street
-                  </Text>
-                  <Text fontSize={24}>{reportData.location.street}</Text>
-                </Box>
-                <Box>
-                  <Text
-                    color={"gray.500"}
-                    fontWeight="600"
-                    textTransform={"uppercase"}
-                    fontSize={11}
-                  >
-                    Type
-                  </Text>
-                  <Text fontSize={24}>{reportData.pet.type}</Text>
-                </Box>
-                <Box>
-                  <Text
-                    color={"gray.500"}
-                    fontWeight="600"
-                    textTransform={"uppercase"}
-                    fontSize={11}
-                  >
-                    Size
-                  </Text>
-                  <Text fontSize={24}>{reportData.pet.size}</Text>
-                </Box>
-              </Flex>
-              <Flex direction={"column"} flex={0.4}>
-                <Box>
-                  <Text
-                    color={"gray.500"}
-                    fontWeight="600"
-                    textTransform={"uppercase"}
-                    fontSize={11}
-                  >
-                    City
-                  </Text>
-                  <Text fontSize={24}>{reportData.location.city}</Text>
-                </Box>
-                <Box>
-                  <Text
-                    color={"gray.500"}
-                    fontWeight="600"
-                    textTransform={"uppercase"}
-                    fontSize={11}
-                  >
-                    Gender
-                  </Text>
-                  <Text fontSize={24}>{reportData.pet.gender}</Text>
-                </Box>
-                <Box>
-                  <Text
-                    color={"gray.500"}
-                    fontWeight="600"
-                    textTransform={"uppercase"}
-                    fontSize={11}
-                  >
-                    Weight
-                  </Text>
-                  <Text fontSize={24}>{reportData.pet.weight}</Text>
-                </Box>
-              </Flex>
-            </Flex>*/
-
 export default ReportDetail;

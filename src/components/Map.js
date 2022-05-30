@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import L from "leaflet";
 import {
   MapContainer,
-  Marker,
   Popup,
   TileLayer,
   useMap,
@@ -11,18 +10,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import { Box } from "@chakra-ui/layout";
 import MapContext from "../context/MapContext";
-import MarkerIcon from "../assets/marker.svg";
-import DogMapData from "./DogMapData";
-
-const markerIcon = L.icon({
-  iconUrl: MarkerIcon,
-  iconSize: [38, 95],
-  iconAnchor: [22, 94],
-  popupAnchor: [-3, -76],
-  shadowUrl: null,
-  shadowSize: null,
-  shadowAnchor: null,
-});
+import AnimalMapData from "./AnimalMapData";
 
 function Component() {
   const { setCurrentBounds, mapCenter } = useContext(MapContext);
@@ -58,7 +46,7 @@ function Map({ results, hoverId }) {
   // eslint-disable-next-line no-unused-vars
 
   return (
-    <Box flex={"0.5"} h="calc(100vh - 140px)">
+    <Box flex={{ base: "1", lg: "0.5" }} h="calc(100vh - 140px)">
       <MapContainer
         center={[-44.8180554, -58.4864219]}
         zoom={13}
@@ -72,7 +60,7 @@ function Map({ results, hoverId }) {
         <TileLayer url="https://api.mapbox.com/styles/v1/tammaroivan/ckw0z68ul9ayg14ujo394a0lo/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidGFtbWFyb2l2YW4iLCJhIjoiY2trazhvN2oyMTVnZDJucGczazM4emdscyJ9.T4aK0C48vrmOWMD8DKjzMw" />
         {results &&
           results.map((reportResult, index) => (
-            <DogMapData
+            <AnimalMapData
               reportResult={reportResult}
               key={reportResult._id}
               hoverId={hoverId}

@@ -1,6 +1,6 @@
-import { Text, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import React from "react";
-import DogResult from "../components/DogResult";
+import AnimalResult from "../components/AnimalResult";
 
 function ShowReports({ reports, onDelete, userName }) {
   return (
@@ -8,7 +8,7 @@ function ShowReports({ reports, onDelete, userName }) {
       {reports &&
         reports.map((report, index) => {
           return (
-            <DogResult
+            <AnimalResult
               petData={report}
               key={report._id}
               onDelete={onDelete}

@@ -56,7 +56,7 @@ function Navbar() {
             </MenuButton>
             <MenuList zIndex="1000">
               <MenuItem onClick={() => history.push("/app/new-report")}>
-                Report a dog lost
+                Reporta un animal encontrado
               </MenuItem>
             </MenuList>
           </Menu>
@@ -86,10 +86,10 @@ function Navbar() {
               </MenuButton>
               <MenuList zIndex="1000">
                 <Link to={`/${userDisplayName}`}>
-                  <MenuItem>Profile</MenuItem>
+                  <MenuItem>Tus reportes</MenuItem>
                 </Link>
                 <Link to="/login" onClick={logOut}>
-                  <MenuItem>Log Out</MenuItem>
+                  <MenuItem>Cerrar sesión</MenuItem>
                 </Link>
               </MenuList>
             </Menu>

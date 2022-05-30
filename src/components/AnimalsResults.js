@@ -1,11 +1,11 @@
 import { Box, Flex, Text } from "@chakra-ui/layout";
 import React from "react";
 import "./resultsbar.css";
-import DogResult from "../components/DogResult";
+import AnimalResult from "./AnimalResult";
 import { Image } from "@chakra-ui/react";
 import dogNotFound from "../assets/dog_not_found.png";
 
-function DogsResults({ results, setHoverId }) {
+function AnimalsResults({ results, setHoverId }) {
   return (
     <Box
       height="100%"
@@ -14,11 +14,12 @@ function DogsResults({ results, setHoverId }) {
       flex={{ base: "1", lg: "0.5" }}
       h="calc(100vh - 140px)"
       justifyContent="center"
+      display={{ base: "none", lg: "flex" }}
     >
       {results?.length !== 0 ? (
         results?.map((dog, i) => {
           return (
-            <DogResult petData={dog} setHoverId={setHoverId} key={dog._id} />
+            <AnimalResult petData={dog} setHoverId={setHoverId} key={dog._id} />
           );
         })
       ) : (
@@ -39,4 +40,4 @@ function DogsResults({ results, setHoverId }) {
   );
 }
 
-export default DogsResults;
+export default AnimalsResults;

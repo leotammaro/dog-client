@@ -5,7 +5,7 @@ import moment from "moment";
 import deleteIcon from "../assets/delete.svg";
 import UserContext from "../context/UserContext";
 
-function DogResult({ petData, userName, setHoverId, onDelete }) {
+function AnimalResult({ petData, userName, setHoverId, onDelete }) {
   const [src, setSrc] = useState("");
   const [loading, setLoading] = useState(true);
   const user = useContext(UserContext);
@@ -62,15 +62,20 @@ function DogResult({ petData, userName, setHoverId, onDelete }) {
             boxShadow={"5px 4px 5px -1px rgba(158,158,158,0.75)"}
           />
           <Flex w={400} direction="column" justifyContent={"space-between"}>
-            <Flex direction={"column"} gridGap={3}>
+            <Flex direction={"column"} gridGap={5} fontSize={18}>
               <Text textTransform="capitalize">{`${petData.pet.type} - ${petData.pet.breed}`}</Text>
-              <Text>Found on: {moment(petData.datetime).format("ll")}</Text>
               <Text>
-                Found on: {petData.location.street}, {petData.location.city}
+                Encontrado el dia: {moment(petData.datetime).format("ll")}
+              </Text>
+              <Text>
+                Encontrado en: {petData.location.street},{" "}
+                {petData.location.city}
               </Text>
             </Flex>
             {user?.email.split("@")[0] === userName && (
               <Image
+                alignSelf={"flex-end"}
+                marginRight={10}
                 src={deleteIcon}
                 opacity={0.5}
                 _hover={{ opacity: 1 }}
@@ -87,4 +92,4 @@ function DogResult({ petData, userName, setHoverId, onDelete }) {
   );
 }
 
-export default DogResult;
+export default AnimalResult;

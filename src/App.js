@@ -16,16 +16,27 @@ import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Profile from "./components/Profile";
 import ReportDetail from "./components/ReportDetail";
+import axios from "axios";
 
 function App() {
   const [user, setUser] = useState({ isLoading: true, isLoggedIn: false });
   useEffect(() => {
     getAuth().onAuthStateChanged(function (firebaseUser) {
+      console.log(firebaseUser);
       setUser({
         ...firebaseUser,
         isLoading: false,
         isLoggedIn: !!firebaseUser,
       });
+      if (firebaseUser) {
+        axios({
+          url: `${process.env.REACT_APP_API_URL}/user/me`,
+          method: "get",
+          headers: {
+            Authorization: firebaseUser.accessToken,
+          },
+        });
+      }
     });
   }, []);
 

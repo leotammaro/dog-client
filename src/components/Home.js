@@ -4,8 +4,8 @@ import Finder from "./Finder";
 import Map from "./Map";
 import MapContext from "../context/MapContext";
 import axios from "axios";
-import FormDogLost from "./FormDogLost";
-import DogsResults from "./DogsResults";
+import FormAnimalLost from "./FormAnimalLost";
+import AnimalsResults from "./AnimalsResults";
 
 function Home() {
   const [currentBounds, setCurrentBounds] = useState([]);
@@ -63,7 +63,7 @@ function Home() {
         overflow="hidden"
         direction={"column"}
       >
-        <FormDogLost onSave={getReports} />
+        <FormAnimalLost onSave={getReports} />
         <Finder results={reportsResults} />
         <Flex
           w="100%"
@@ -72,7 +72,7 @@ function Home() {
           h="100%"
           alignItems={"center"}
         >
-          <DogsResults results={reportsResults} setHoverId={setHoverId} />
+          <AnimalsResults results={reportsResults} setHoverId={setHoverId} />
           {showMap && <Map results={reportsResults} hoverId={hoverId} />}
         </Flex>
       </Flex>

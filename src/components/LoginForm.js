@@ -6,12 +6,32 @@ import { chakra } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Button } from "@chakra-ui/button";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 function LoginForm() {
   const { register, handleSubmit } = useForm();
   const LinkCh = chakra(Link);
+
+  const logInWithEmail = (email, password) => {
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
   return (
-    <form onSubmit={handleSubmit((data) => {})} style={{ display: "contents" }}>
+    <form
+      onSubmit={handleSubmit((data) => {
+        logInWithEmail(data.email, data.password);
+      })}
+      style={{ display: "contents" }}
+    >
       <Grid templateColumns="1fr" rowGap="20px" marginBottom="20px">
         <Flex alignItems="center">
           <EmailIcon position="absolute" marginLeft="20px" />
@@ -41,6 +61,7 @@ function LoginForm() {
             fontWeight="400"
             boxShadow="0px 0px 3px rgba(0,0,0,0.1)"
             _focus={{ outline: "none" }}
+            type="password"
             {...register("password")}
           ></Input>
         </Flex>

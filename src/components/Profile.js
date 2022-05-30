@@ -11,7 +11,7 @@ import axios from "axios";
 
 function Profile() {
   const { userName } = useParams();
-  const [reportsByUser, setReportsByUser] = useState(null);
+  const [reportsByUser, setReportsByUser] = useState([]);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState("");
   const [userProfile, setUserProfile] = React.useState(null);
@@ -22,14 +22,16 @@ function Profile() {
       method: "get",
       url: `${process.env.REACT_APP_API_URL}/report/${userName}`,
     })
-      .then((response) => setUserProfile(response))
+      .then((response) => {
+        setUserProfile(response);
+        console.log(response);
+      })
       .catch((err) => setError("User not Found"));
   }, [userName]);
 
   useEffect(() => {
     if (userProfile) {
       getReportsByUser(userName).then((response) => {
-        console.log(response);
         setReportsByUser(response.data);
         setError("");
         setLoading(false);
@@ -59,19 +61,25 @@ function Profile() {
 
   return (
     <>
-      {!loading ? (
-        <Flex direction={"column"}>
-          <Text>User Profile</Text>
-          {UserContext && (
+      {!loading && UserContext ? (
+        <Flex direction={"column"} alignItems="center">
+          {reportsByUser.length !== 0 ? (
             <>
-              <Flex alignItems="center" gridGap={3}></Flex>
+              <Text fontSize={20} fontWeight="600">
+                Reportes realizados por {userName}
+              </Text>
 
-              <ShowReports
-                reports={reportsByUser}
-                userName={userName}
-                onDelete={onDelete}
-              />
+              <>
+                <Flex alignItems="center" gridGap={3}></Flex>
+                <ShowReports
+                  reports={reportsByUser}
+                  userName={userName}
+                  onDelete={onDelete}
+                />
+              </>
             </>
+          ) : (
+            <Text fontSize={20}>Este usuario no registra nigun reporte.</Text>
           )}
         </Flex>
       ) : (

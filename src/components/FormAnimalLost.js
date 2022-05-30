@@ -20,15 +20,16 @@ import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { geoCordsfromAdress } from "../service/geolocation";
 import { useLocation, useHistory } from "react-router-dom";
 
-function FormDogLost({ onSave }) {
+function FormAnimalLost({ onSave }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const { handleSubmit, control, watch, reset } = useForm();
   const fileRef = useRef();
   const user = useContext(UserContext);
-  const selectedType = watch("type");
+  const selectedType = watch("tipo");
   const location = useLocation();
   const history = useHistory();
+  console.log(breeds);
 
   React.useEffect(() => {
     setIsOpen(location.pathname === "/app/new-report");
@@ -37,23 +38,23 @@ function FormDogLost({ onSave }) {
   const onSubmit = async (data) => {
     setIsLoading(true);
     const {
-      type,
-      breed,
-      gender,
-      size,
-      weight,
-      age,
+      tipo,
+      raza,
+      genero,
+      tamaño,
+      peso,
+      edad,
       color,
-      address,
-      description,
-      phoneNumber,
+      direccion,
+      descripcion,
+      numeroDeTelefono,
     } = data;
     const storage = getStorage();
     const fileImage = fileRef.current.files[0];
     const imageReportRef = ref(storage, fileImage.name);
 
     uploadBytes(imageReportRef, fileImage).then(async (photoUrl) => {
-      const geoResponse = await geoCordsfromAdress(address);
+      const geoResponse = await geoCordsfromAdress(direccion);
       if (geoResponse.length !== 0) {
         const { lat, lon, display_name } = geoResponse[0];
         const adressReport = display_name.split(",");
@@ -63,12 +64,12 @@ function FormDogLost({ onSave }) {
         const photoAnimal = photoUrl.metadata.fullPath;
 
         const petDescription = {
-          type: type.value,
-          breed: breed.value,
-          gender: gender.value,
-          size: size.value,
-          weight: weight.value,
-          age: age.value,
+          type: tipo.value,
+          breed: raza.value,
+          gender: genero.value,
+          size: tamaño.value,
+          weight: peso.value,
+          age: edad.value,
           color: color.value,
           photoURL: photoAnimal,
         };
@@ -88,8 +89,8 @@ function FormDogLost({ onSave }) {
               city,
               country,
             },
-            description,
-            phoneNumber,
+            description: descripcion,
+            phoneNumber: numeroDeTelefono,
           },
           headers: { Authorization: user.accessToken },
         }).then(() => {
@@ -118,7 +119,7 @@ function FormDogLost({ onSave }) {
 
           <DrawerBody>
             <Controller
-              name="Tipo"
+              name="tipo"
               control={control}
               rules={{ required: "El tipo es requerido" }}
               render={({
@@ -138,7 +139,7 @@ function FormDogLost({ onSave }) {
               )}
             />
             <Controller
-              name="Raza"
+              name="raza"
               control={control}
               rules={{ required: "La raza es requerida" }}
               render={({
@@ -179,7 +180,7 @@ function FormDogLost({ onSave }) {
               )}
             />
             <Controller
-              name="Genero"
+              name="genero"
               control={control}
               rules={{ required: "El genero es requerido" }}
               render={({
@@ -199,7 +200,7 @@ function FormDogLost({ onSave }) {
               )}
             />
             <Controller
-              name="Tamaño"
+              name="tamaño"
               control={control}
               rules={{ required: "El tamaño es requerido" }}
               render={({
@@ -219,7 +220,7 @@ function FormDogLost({ onSave }) {
               )}
             />
             <Controller
-              name="Peso"
+              name="peso"
               control={control}
               rules={{ required: "El peso es requerido" }}
               render={({
@@ -239,7 +240,7 @@ function FormDogLost({ onSave }) {
               )}
             />
             <Controller
-              name="Edad"
+              name="edad"
               control={control}
               rules={{ required: "La edad es requerida" }}
               render={({
@@ -259,7 +260,7 @@ function FormDogLost({ onSave }) {
               )}
             />
             <Controller
-              name="Foto"
+              name="foto"
               control={control}
               render={({ fieldState: { error } }) => (
                 <Field error={error?.message} label="Foto">
@@ -275,6 +276,7 @@ function FormDogLost({ onSave }) {
             <Controller
               name="Dirección"
               control={control}
+              rules={{ required: "La direccion es requerida" }}
               render={({
                 field: { value, onChange },
                 fieldState: { error },
@@ -293,9 +295,9 @@ function FormDogLost({ onSave }) {
               )}
             />
             <Controller
-              name="Descripción"
+              name="descripcion"
               control={control}
-              rules={{ required: "La descripción es necesaria" }}
+              rules={{ required: "La descripción es requerida" }}
               render={({
                 field: { value, onChange },
                 fieldState: { error },
@@ -320,7 +322,7 @@ function FormDogLost({ onSave }) {
                 <Field error={error?.message} label="Telefono">
                   <Input
                     placeholder="Telefono"
-                    value={value}
+                    value={value || ""}
                     onChange={onChange}
                     fontSize={12}
                   />
@@ -343,4 +345,4 @@ function FormDogLost({ onSave }) {
   );
 }
 
-export default FormDogLost;
+export default FormAnimalLost;
