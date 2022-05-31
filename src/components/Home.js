@@ -19,8 +19,8 @@ function Home() {
       method: "get",
       url: `${process.env.REACT_APP_API_URL}/report`,
       params: {
-        upperRight: currentBounds[0].join(","),
-        bottomLeft: currentBounds[1].join(","),
+        upperRight: currentBounds[0]?.join(","),
+        bottomLeft: currentBounds[1]?.join(","),
       },
     }).then((response) => setReportsResults(response.data));
   }, [currentBounds, setReportsResults]);

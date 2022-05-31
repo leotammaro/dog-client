@@ -23,7 +23,8 @@ import { useLocation, useHistory } from "react-router-dom";
 function FormAnimalLost({ onSave }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-  const { handleSubmit, control, watch, reset, setError } = useForm();
+  const { handleSubmit, control, watch, reset, setError, clearErrors } =
+    useForm();
   const fileRef = useRef();
   const user = useContext(UserContext);
   const selectedType = watch("tipo");
@@ -50,10 +51,6 @@ function FormAnimalLost({ onSave }) {
     } = data;
     const storage = getStorage();
     const fileImage = fileRef.current.files[0];
-    if (!fileImage) {
-      setIsLoading(false);
-      return setError("foto", { required: true });
-    }
     const imageReportRef = ref(storage, fileImage.name);
 
     uploadBytes(imageReportRef, fileImage).then(async (photoUrl) => {
@@ -273,13 +270,18 @@ function FormAnimalLost({ onSave }) {
               name="foto"
               control={control}
               rules={{ required: "Debe seleccionar una foto" }}
-              render={({ fieldState: { error } }) => (
+              render={({
+                field: { value, onChange },
+                fieldState: { error },
+              }) => (
                 <Field error={error?.message} label="Foto">
                   <Input
+                    value={value}
                     type="file"
                     border="none"
                     accept="image/*"
                     ref={fileRef}
+                    onChange={onChange}
                   />
                 </Field>
               )}
