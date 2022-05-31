@@ -17,6 +17,7 @@ import Navbar from "./components/Navbar";
 import Profile from "./components/Profile";
 import ReportDetail from "./components/ReportDetail";
 import axios from "axios";
+import theme from "./data/theme";
 
 function App() {
   const [user, setUser] = useState({ isLoading: true, isLoggedIn: false });
@@ -41,7 +42,7 @@ function App() {
   }, []);
 
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <UserContext.Provider value={user}>
         <Router>
           <Navbar />
