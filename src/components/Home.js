@@ -61,13 +61,7 @@ function Home() {
       >
         <FormAnimalLost onSave={getReports} />
         <Finder results={reportsResults} />
-        <Flex
-          w="100%"
-          ref={homeRef}
-          justifyContent="center"
-          h="100%"
-          alignItems={"center"}
-        >
+        <Flex w="100%" ref={homeRef} h="100%">
           <AnimalsResults results={reportsResults} setHoverId={setHoverId} />
           <Map results={reportsResults} hoverId={hoverId} />
         </Flex>

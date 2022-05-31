@@ -15,6 +15,10 @@ function Component() {
       [_northEast.lat, _northEast.lng],
       [_southWest.lat, _southWest.lng],
     ]);
+    localStorage.setItem(
+      "center",
+      `${map.getCenter().lat},${map.getCenter().lng}`
+    );
   }, [map, setCurrentBounds]);
 
   useMapEvent("moveend", setNewBouds);
@@ -27,8 +31,16 @@ function Component() {
   }, [map, setNewBouds]);
 
   useEffect(() => {
+    const exisingCenter = localStorage.getItem("center");
+    if (exisingCenter) {
+      const latlng = exisingCenter.split(",");
+      map.setView([latlng[0], latlng[1]], 12);
+    }
+  }, [map]);
+
+  useEffect(() => {
     if (!!mapCenter.length) {
-      map.panTo(mapCenter, 13);
+      map.panTo(mapCenter, 12);
     }
   }, [mapCenter, map]);
 

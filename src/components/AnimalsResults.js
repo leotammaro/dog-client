@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/layout";
+import { Flex, Text } from "@chakra-ui/layout";
 import React from "react";
 import "./resultsbar.css";
 import AnimalResult from "./AnimalResult";
@@ -7,14 +7,13 @@ import dogNotFound from "../assets/dog_not_found.png";
 
 function AnimalsResults({ results, setHoverId }) {
   return (
-    <Box
-      height="100%"
+    <Flex
+      direction={"column"}
       overflow="scroll"
       className="results-container"
       flex={{ base: "1", lg: "0.5" }}
-      h="calc(100vh - 140px)"
-      justifyContent="center"
       display={{ base: "none", lg: "flex" }}
+      wrap
     >
       {results?.length !== 0 ? (
         results?.map((dog, i) => {
@@ -36,7 +35,7 @@ function AnimalsResults({ results, setHoverId }) {
           </Text>
         </Flex>
       )}
-    </Box>
+    </Flex>
   );
 }
 

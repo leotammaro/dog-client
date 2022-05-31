@@ -63,11 +63,18 @@ function AnimalResult({ petData, userName, setHoverId, onDelete }) {
           />
           <Flex w={400} direction="column" justifyContent={"space-between"}>
             <Flex direction={"column"} gridGap={5} fontSize={18}>
-              <Text textTransform="capitalize">{`${petData.pet.type} - ${petData.pet.breed}`}</Text>
-              <Text>
-                Encontrado el dia: {moment(petData.datetime).format("ll")}
+              <Text
+                textTransform="capitalize"
+                fontSize={14}
+                fontWeight={600}
+              >{`${petData.pet.type} - ${petData.pet.breed}`}</Text>
+              <Text fontSize={13}>
+                Encontrado el dia:{" "}
+                <Text fontWeight={500} display="inline">
+                  {moment(petData.datetime).format("ll")}
+                </Text>
               </Text>
-              <Text>
+              <Text fontSize={13}>
                 Encontrado en: {petData.location.street},{" "}
                 {petData.location.city}
               </Text>

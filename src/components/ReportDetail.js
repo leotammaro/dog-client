@@ -97,7 +97,7 @@ function ReportDetail() {
             <Text
               alignSelf={"center"}
               fontWeight="bold"
-              fontSize={{ base: 16, lg: 9 }}
+              fontSize={16}
               textTransform="uppercase"
               paddingBottom={5}
             >
@@ -111,7 +111,7 @@ function ReportDetail() {
             >
               <Text
                 textTransform="capitalize"
-                fontSize={{ base: 18, lg: 30 }}
+                fontSize={18}
                 fontWeight="500"
                 flex={{ base: 1, lg: 0.4 }}
               >
@@ -132,9 +132,7 @@ function ReportDetail() {
                   >
                     Calle
                   </Text>
-                  <Text fontSize={{ base: 14, lg: 20 }}>
-                    {reportData.location.street}
-                  </Text>
+                  <Text fontSize={14}>{reportData.location.street}</Text>
                 </Box>
                 <Box flex={0.4}>
                   <Text
@@ -194,11 +192,15 @@ function ReportDetail() {
             </Text>
             <Flex w="100%" justifyContent={"center"} gridGap={8}>
               <Tooltip hasArrow label={reportData.phoneNumber} fontSize="md">
-                <PhoneIcon />
+                <a href={`tel:${reportData.phoneNumber}`}>
+                  <PhoneIcon />
+                </a>
               </Tooltip>
 
               <Tooltip hasArrow label={userReportData.email} fontSize="md">
-                <EmailIcon />
+                <a href={`mailto:${userReportData.email}`}>
+                  <EmailIcon />
+                </a>
               </Tooltip>
             </Flex>
           </Flex>
