@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { ColorModeScript } from '@chakra-ui/react'
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "normalize.css";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import theme from "./data/theme";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -20,6 +22,7 @@ getAnalytics(app);
 
 ReactDOM.render(
   <React.StrictMode>
+    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <App />
   </React.StrictMode>,
   document.getElementById("root")
