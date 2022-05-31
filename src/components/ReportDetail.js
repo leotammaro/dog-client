@@ -1,7 +1,6 @@
 import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Button,
   Flex,
   Image,
   Spinner,
@@ -38,7 +37,7 @@ function ReportDetail() {
         }
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [id]);
 
   console.log(reportData);
 

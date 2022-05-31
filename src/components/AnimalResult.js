@@ -1,4 +1,4 @@
-import { Image, Flex, Text, Box, Spinner } from "@chakra-ui/react";
+import { Image, Flex, Text, Spinner } from "@chakra-ui/react";
 import React, { useState, useEffect, useContext } from "react";
 import { addDownloadURL } from "../service/getImagesFromStorage";
 import moment from "moment";
@@ -16,14 +16,14 @@ function AnimalResult({ petData, userName, setHoverId, onDelete }) {
 
   useEffect(() => {
     addDownloadURL(petData.pet.photoURL).then(async (imageURL) => {
-      await setSrc(imageURL);
+     setSrc(imageURL);
       setLoading(false);
     });
-  }, []);
+  }, [petData.pet.photoURL]);
 
   const handleMouseEnter = React.useCallback(() => {
     setHoverId?.(petData._id);
-  }, []);
+  }, [petData._id]);
 
   const handleMouseLeave = React.useCallback(() => {
     setHoverId?.("");

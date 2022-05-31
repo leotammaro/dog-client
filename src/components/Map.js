@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import L from "leaflet";
 import {
   MapContainer,
-  Popup,
   TileLayer,
   useMap,
   useMapEvent,
@@ -31,13 +29,13 @@ function Component() {
       map.setView([position.coords.latitude, position.coords.longitude]);
       setNewBouds();
     });
-  }, []);
+  }, [map]);
 
   useEffect(() => {
     if (!!mapCenter.length) {
       map.panTo(mapCenter, 13);
     }
-  }, [mapCenter]);
+  }, [mapCenter,map]);
 
   return <></>;
 }

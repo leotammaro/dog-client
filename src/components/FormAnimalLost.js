@@ -36,6 +36,7 @@ function FormAnimalLost({ onSave }) {
   }, [location]);
 
   const onSubmit = async (data) => {
+    console.log(data)
     setIsLoading(true);
     const {
       tipo,
@@ -262,6 +263,7 @@ function FormAnimalLost({ onSave }) {
             <Controller
               name="foto"
               control={control}
+            
               render={({ fieldState: { error } }) => (
                 <Field error={error?.message} label="Foto">
                   <Input
@@ -274,7 +276,7 @@ function FormAnimalLost({ onSave }) {
               )}
             />
             <Controller
-              name="Dirección"
+              name="direccion"
               control={control}
               rules={{ required: "La direccion es requerida" }}
               render={({

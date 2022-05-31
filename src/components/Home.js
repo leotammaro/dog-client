@@ -12,7 +12,6 @@ function Home() {
   const [mapCenter, setMapCenter] = useState([]);
   const [reportsResults, setReportsResults] = useState([]);
   const homeRef = React.useRef(null);
-  const [showMap, setShowMap] = useState(false);
   const [hoverId, setHoverId] = React.useState("");
 
   const getReports = React.useCallback(() => {
@@ -26,6 +25,8 @@ function Home() {
     }).then((response) => setReportsResults(response.data));
   }, [currentBounds, setReportsResults]);
 
+ 
+
   useEffect(() => {
     if (currentBounds.length !== 0) {
       getReports();
@@ -34,8 +35,7 @@ function Home() {
 
   useEffect(() => {
     if (homeRef.current.offsetWidth < 970) {
-      setShowMap(false);
-
+     
       axios({
         method: "get",
         url: `${process.env.REACT_APP_API_URL}/report/near`,
@@ -47,7 +47,7 @@ function Home() {
         setReportsResults(response.data);
       });
     } else {
-      setShowMap(true);
+     
       if (currentBounds.length !== 0) getReports();
     }
   }, [mapCenter]);
@@ -73,7 +73,7 @@ function Home() {
           alignItems={"center"}
         >
           <AnimalsResults results={reportsResults} setHoverId={setHoverId} />
-          {showMap && <Map results={reportsResults} hoverId={hoverId} />}
+          <Map results={reportsResults} hoverId={hoverId} />
         </Flex>
       </Flex>
     </MapContext.Provider>

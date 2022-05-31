@@ -1,12 +1,12 @@
 import { Box, Flex, Image, Spinner, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom";
 import ShowReports from "../service/showReports";
 import { deleteObject, getStorage, ref } from "firebase/storage";
 import { deleteReport, getReportsByUser } from "../service/reportsService";
 import UserContext from "../context/UserContext";
 import dogNotFound from "../assets/dog_not_found.png";
-import { useLocation } from "react-router-dom";
+
 import axios from "axios";
 
 function Profile() {
@@ -24,9 +24,8 @@ function Profile() {
     })
       .then((response) => {
         setUserProfile(response);
-        console.log(response);
       })
-      .catch((err) => setError("User not Found"));
+      .catch(() => setError("User not Found"));
   }, [userName]);
 
   useEffect(() => {

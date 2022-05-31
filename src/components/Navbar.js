@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Text, Flex, Button, Box } from "@chakra-ui/react";
+import { Flex, Button } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import "./navbar.css";
 import UserContext from "../context/UserContext";

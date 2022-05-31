@@ -20,6 +20,7 @@ import axios from "axios";
 
 function App() {
   const [user, setUser] = useState({ isLoading: true, isLoggedIn: false });
+  console.log(user.isLoggedIn)
   useEffect(() => {
     getAuth().onAuthStateChanged(function (firebaseUser) {
      
@@ -74,7 +75,8 @@ function App() {
                   )}
                 </Route>
                 <Route path="/app">
-                  <Home />
+                  {user.isLoggedIn ? <Home /> :  
+                  <Redirect to="/login" />}
                 </Route>
                 <Route path="/report/:id">
                   <ReportDetail />
