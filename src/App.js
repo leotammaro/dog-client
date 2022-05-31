@@ -21,7 +21,6 @@ import theme from "./data/theme";
 
 function App() {
   const [user, setUser] = useState({ isLoading: true, isLoggedIn: false });
-  console.log(user.isLoggedIn)
   useEffect(() => {
     getAuth().onAuthStateChanged(function (firebaseUser) {
      
