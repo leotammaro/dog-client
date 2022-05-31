@@ -3,7 +3,7 @@ import { Button } from "@chakra-ui/button";
 import { Text } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { Input } from "@chakra-ui/input";
-import {Flex } from "@chakra-ui/layout";
+import { Flex } from "@chakra-ui/layout";
 import React, { useContext, useState, useEffect } from "react";
 import MapContext from "../context/MapContext";
 import { geoCordsfromAdress } from "../service/geolocation";
@@ -21,7 +21,6 @@ function Finder() {
   useEffect(() => {
     async function setCords() {
       const resultsAdressSearch = await geoCordsfromAdress(formResults);
-      console.log(resultsAdressSearch);
       if (resultsAdressSearch.length !== 0) {
         const { lat, lon } = resultsAdressSearch[0];
         setMessageErrorAdress("");

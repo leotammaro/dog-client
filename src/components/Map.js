@@ -1,10 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  useMap,
-  useMapEvent,
-} from "react-leaflet";
+import { MapContainer, TileLayer, useMap, useMapEvent } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Box } from "@chakra-ui/layout";
 import MapContext from "../context/MapContext";
@@ -14,13 +9,13 @@ function Component() {
   const { setCurrentBounds, mapCenter } = useContext(MapContext);
   const map = useMap();
 
-  const setNewBouds = () => {
+  const setNewBouds = React.useCallback(() => {
     const { _northEast, _southWest } = map.getBounds();
     setCurrentBounds([
       [_northEast.lat, _northEast.lng],
       [_southWest.lat, _southWest.lng],
     ]);
-  };
+  }, [map, setCurrentBounds]);
 
   useMapEvent("moveend", setNewBouds);
 
@@ -29,13 +24,13 @@ function Component() {
       map.setView([position.coords.latitude, position.coords.longitude]);
       setNewBouds();
     });
-  }, [map]);
+  }, [map, setNewBouds]);
 
   useEffect(() => {
     if (!!mapCenter.length) {
       map.panTo(mapCenter, 13);
     }
-  }, [mapCenter,map]);
+  }, [mapCenter, map]);
 
   return <></>;
 }
@@ -46,8 +41,8 @@ function Map({ results, hoverId }) {
   return (
     <Box flex={{ base: "1", lg: "0.5" }} h="calc(100vh - 140px)">
       <MapContainer
-        center={[-44.8180554, -58.4864219]}
-        zoom={13}
+        center={[-34.6194586, -58.4510539]}
+        zoom={12}
         style={{
           height: "100%",
           flex: "1",

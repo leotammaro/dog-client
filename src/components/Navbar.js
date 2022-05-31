@@ -27,7 +27,6 @@ function Navbar() {
   };
 
   useEffect(() => {
-    console.log();
     setUserDisplayName(email?.split("@")[0]);
   }, [email]);
 
@@ -50,16 +49,14 @@ function Navbar() {
 
       <Flex alignItems="center" flex="0.1" justifyContent="space-between">
         {isLoggedIn && (
-          <Menu>
-            <MenuButton h="50px" w="50px" marginRight={3}>
-              <Image src={dogLost} />
-            </MenuButton>
-            <MenuList zIndex="1000">
-              <MenuItem onClick={() => history.push("/app/new-report")}>
-                Reporta un animal encontrado
-              </MenuItem>
-            </MenuList>
-          </Menu>
+          <Button
+            px={10}
+            borderRadius={10}
+            mr={3}
+            onClick={() => history.push("/app/new-report")}
+          >
+            + Reportar Mascota
+          </Button>
         )}
 
         {isLoading ? (

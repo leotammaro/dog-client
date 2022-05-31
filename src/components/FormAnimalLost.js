@@ -23,20 +23,18 @@ import { useLocation, useHistory } from "react-router-dom";
 function FormAnimalLost({ onSave }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-  const { handleSubmit, control, watch, reset } = useForm();
+  const { handleSubmit, control, watch, reset, setError } = useForm();
   const fileRef = useRef();
   const user = useContext(UserContext);
   const selectedType = watch("tipo");
   const location = useLocation();
   const history = useHistory();
-  
 
   React.useEffect(() => {
     setIsOpen(location.pathname === "/app/new-report");
   }, [location]);
 
   const onSubmit = async (data) => {
-    console.log(data)
     setIsLoading(true);
     const {
       tipo,
@@ -52,6 +50,10 @@ function FormAnimalLost({ onSave }) {
     } = data;
     const storage = getStorage();
     const fileImage = fileRef.current.files[0];
+    if (!fileImage) {
+      setIsLoading(false);
+      return setError("foto", { required: true });
+    }
     const imageReportRef = ref(storage, fileImage.name);
 
     uploadBytes(imageReportRef, fileImage).then(async (photoUrl) => {
@@ -131,6 +133,7 @@ function FormAnimalLost({ onSave }) {
                   <Select
                     value={value}
                     onChange={onChange}
+                    placeholder="Tipo"
                     options={Object.keys(types).map((type) => ({
                       value: type,
                       label: types[type],
@@ -151,6 +154,7 @@ function FormAnimalLost({ onSave }) {
                   <Select
                     value={value}
                     onChange={onChange}
+                    placeholder="Raza"
                     options={breeds[selectedType?.value]?.map((breed) => ({
                       value: breed,
                       label: breed,
@@ -172,6 +176,7 @@ function FormAnimalLost({ onSave }) {
                     isMulti
                     value={value}
                     onChange={onChange}
+                    placeholder="Color"
                     options={Object.keys(colors).map((color) => ({
                       value: color,
                       label: colors[color],
@@ -192,6 +197,7 @@ function FormAnimalLost({ onSave }) {
                   <Select
                     value={value}
                     onChange={onChange}
+                    placeholder="Genero"
                     options={Object.keys(genders).map((gender) => ({
                       value: gender,
                       label: genders[gender],
@@ -212,6 +218,7 @@ function FormAnimalLost({ onSave }) {
                   <Select
                     value={value}
                     onChange={onChange}
+                    placeholder="Tamaño"
                     options={Object.keys(sizes).map((size) => ({
                       value: size,
                       label: sizes[size],
@@ -232,6 +239,7 @@ function FormAnimalLost({ onSave }) {
                   <Select
                     value={value}
                     onChange={onChange}
+                    placeholder="Peso"
                     options={Object.keys(weights).map((weight) => ({
                       value: weight,
                       label: weights[weight],
@@ -252,6 +260,7 @@ function FormAnimalLost({ onSave }) {
                   <Select
                     value={value}
                     onChange={onChange}
+                    placeholder="Edad"
                     options={Object.keys(ages).map((age) => ({
                       value: age,
                       label: ages[age],
@@ -263,7 +272,7 @@ function FormAnimalLost({ onSave }) {
             <Controller
               name="foto"
               control={control}
-            
+              rules={{ required: "Debe seleccionar una foto" }}
               render={({ fieldState: { error } }) => (
                 <Field error={error?.message} label="Foto">
                   <Input

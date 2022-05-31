@@ -32,7 +32,7 @@ function AnimalsResults({ results, setHoverId }) {
         >
           <Image src={dogNotFound} w={100} />
           <Text fontSize="20px">
-            No se han encontrado perros perdidos por esta zona!
+            No se han encontrado mascotas perdidas por esta zona!
           </Text>
         </Flex>
       )}

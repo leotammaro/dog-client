@@ -16,18 +16,18 @@ function AnimalResult({ petData, userName, setHoverId, onDelete }) {
 
   useEffect(() => {
     addDownloadURL(petData.pet.photoURL).then(async (imageURL) => {
-     setSrc(imageURL);
+      setSrc(imageURL);
       setLoading(false);
     });
   }, [petData.pet.photoURL]);
 
   const handleMouseEnter = React.useCallback(() => {
     setHoverId?.(petData._id);
-  }, [petData._id]);
+  }, [petData._id, setHoverId]);
 
   const handleMouseLeave = React.useCallback(() => {
     setHoverId?.("");
-  }, []);
+  }, [setHoverId]);
 
   return (
     <Flex
