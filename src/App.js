@@ -23,7 +23,6 @@ function App() {
   const [user, setUser] = useState({ isLoading: true, isLoggedIn: false });
   useEffect(() => {
     getAuth().onAuthStateChanged(function (firebaseUser) {
-     
       setUser({
         ...firebaseUser,
         isLoading: false,
@@ -42,12 +41,12 @@ function App() {
   }, []);
 
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider colorModeManager={"cookie"} theme={theme}>
       <UserContext.Provider value={user}>
         <Router>
           <Navbar />
           <Flex
-            h="calc(100vh - 90px)"
+            h="calc(100vh - 110px)"
             w="100%"
             alignItems="center"
             justifyContent="center"
@@ -75,8 +74,7 @@ function App() {
                   )}
                 </Route>
                 <Route path="/app">
-                  {user.isLoggedIn ? <Home /> :  
-                  <Redirect to="/login" />}
+                  {user.isLoggedIn ? <Home /> : <Redirect to="/login" />}
                 </Route>
                 <Route path="/report/:id">
                   <ReportDetail />
