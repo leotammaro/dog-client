@@ -1,7 +1,7 @@
+import React from "react";
 import { Box, ListItem, Text, UnorderedList } from "@chakra-ui/react";
-import React, { Children } from "react";
 
-function TextResults({ children }) {
+function TextResults() {
   return (
     <Box>
       <Text></Text>

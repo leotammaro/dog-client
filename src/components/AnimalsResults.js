@@ -13,10 +13,9 @@ function AnimalsResults({ results, setHoverId }) {
       className="results-container"
       flex={{ base: "1", lg: "0.5" }}
       display={{ base: "none", lg: "flex" }}
-
     >
       {results?.length !== 0 ? (
-        results?.map((dog, i) => {
+        results?.map((dog) => {
           return (
             <AnimalResult petData={dog} setHoverId={setHoverId} key={dog._id} />
           );

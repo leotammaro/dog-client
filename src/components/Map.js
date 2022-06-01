@@ -19,28 +19,24 @@ function Component() {
       "center",
       `${map.getCenter().lat},${map.getCenter().lng}`
     );
-    localStorage.setItem("zoom",map.getZoom())
+    localStorage.setItem("zoom", map.getZoom());
   }, [map, setCurrentBounds]);
 
   useMapEvent("moveend", setNewBouds);
 
- 
   useEffect(() => {
     const existingCenter = localStorage.getItem("center");
     if (existingCenter) {
-      const existingZoom = localStorage.getItem("zoom")
+      const existingZoom = localStorage.getItem("zoom");
       const latlng = existingCenter.split(",");
-      map.setView([latlng[0], latlng[1]], existingZoom||12);
-  
-    }else{
+      map.setView([latlng[0], latlng[1]], existingZoom || 12);
+    } else {
       navigator.geolocation.getCurrentPosition(function (position) {
         map.setView([position.coords.latitude, position.coords.longitude]);
         setNewBouds();
       });
     }
   }, [map, setNewBouds]);
-
-  
 
   return <></>;
 }
@@ -49,7 +45,10 @@ function Map({ results, hoverId }) {
   // eslint-disable-next-line no-unused-vars
 
   return (
-    <Box flex={{ base: "1", lg: "0.5" }} h={{base:"calc(100vh - 180px)",lg:"calc(100vh - 140px)"}}>
+    <Box
+      flex={{ base: "1", lg: "0.5" }}
+      h={{ base: "calc(100vh - 180px)", lg: "calc(100vh - 140px)" }}
+    >
       <MapContainer
         center={[-34.6194586, -58.4510539]}
         zoom={12}
@@ -62,7 +61,7 @@ function Map({ results, hoverId }) {
         <Component />
         <TileLayer url="https://api.mapbox.com/styles/v1/tammaroivan/ckw0z68ul9ayg14ujo394a0lo/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidGFtbWFyb2l2YW4iLCJhIjoiY2trazhvN2oyMTVnZDJucGczazM4emdscyJ9.T4aK0C48vrmOWMD8DKjzMw" />
         {results &&
-          results.map((reportResult, index) => (
+          results.map((reportResult) => (
             <AnimalMapData
               reportResult={reportResult}
               key={reportResult._id}

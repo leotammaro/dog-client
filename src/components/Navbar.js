@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Flex, Button } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
-import "./navbar.css";
 import UserContext from "../context/UserContext";
 import userProfile from "../assets/user.svg";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
@@ -9,7 +8,6 @@ import menu from "../assets/menu.svg";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { Spinner } from "@chakra-ui/react";
-
 
 function Navbar() {
   const [userDisplayName, setUserDisplayName] = useState("");
@@ -19,11 +17,7 @@ function Navbar() {
   const history = useHistory();
 
   const logOut = () => {
-    signOut(auth)
-      .then(() => history.push("/login"))
-      .catch((error) => {
-        // An error happened.
-      });
+    signOut(auth).then(() => history.push("/login"));
   };
 
   useEffect(() => {

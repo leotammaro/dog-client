@@ -6,7 +6,7 @@ function ShowReports({ reports, onDelete, userName }) {
   return (
     <Flex justifyContent="center" alignItems="center" direction="column">
       {reports &&
-        reports.map((report, index) => {
+        reports.map((report) => {
           return (
             <AnimalResult
               petData={report}
