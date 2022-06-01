@@ -1,4 +1,4 @@
-import { Image, Flex, Text, Spinner } from "@chakra-ui/react";
+import { Image, Flex, Text, Spinner, Box } from "@chakra-ui/react";
 import React, { useState, useEffect, useContext } from "react";
 import { addDownloadURL } from "../service/getImagesFromStorage";
 import moment from "moment";
@@ -68,12 +68,12 @@ function AnimalResult({ petData, userName, setHoverId, onDelete }) {
                 fontSize={14}
                 fontWeight={600}
               >{`${petData.pet.type} - ${petData.pet.breed}`}</Text>
-              <Text fontSize={13}>
+              <Box fontSize={13}>
                 Encontrado el dia:{" "}
                 <Text fontWeight={500} display="inline">
                   {moment(petData.datetime).format("ll")}
                 </Text>
-              </Text>
+              </Box>
               <Text fontSize={13}>
                 Encontrado en: {petData.location.street},{" "}
                 {petData.location.city}
