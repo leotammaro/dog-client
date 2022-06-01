@@ -9,7 +9,7 @@ import menu from "../assets/menu.svg";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { Spinner } from "@chakra-ui/react";
-import dogLost from "../assets/dogLost.svg";
+
 
 function Navbar() {
   const [userDisplayName, setUserDisplayName] = useState("");

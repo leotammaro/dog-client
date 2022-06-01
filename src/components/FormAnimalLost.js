@@ -23,7 +23,7 @@ import { useLocation, useHistory } from "react-router-dom";
 function FormAnimalLost({ onSave }) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-  const { handleSubmit, control, watch, reset, setError, clearErrors } =
+  const { handleSubmit, control, watch, reset } =
     useForm();
   const fileRef = useRef();
   const user = useContext(UserContext);

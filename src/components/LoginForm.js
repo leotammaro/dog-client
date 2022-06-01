@@ -2,7 +2,7 @@ import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { Input } from "@chakra-ui/input";
 import { Flex, Grid, Stack } from "@chakra-ui/layout";
 import React from "react";
-import { chakra } from "@chakra-ui/react";
+import { chakra ,Text} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Button } from "@chakra-ui/button";
@@ -11,19 +11,16 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 function LoginForm() {
   const { register, handleSubmit } = useForm();
   const LinkCh = chakra(Link);
+  const [errorAuth,setErrorAuth] = React.useState("")
 
   const logInWithEmail = (email, password) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        // ...
-      })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
+        setErrorAuth(errorMessage)
       });
+    
   };
   return (
     <form
@@ -32,7 +29,7 @@ function LoginForm() {
       })}
       style={{ display: "contents" }}
     >
-      <Grid templateColumns="1fr" rowGap="20px" marginBottom="20px">
+      <Grid templateColumns="1fr" rowGap="20px" marginBottom="20px" >
         <Flex alignItems="center">
           <EmailIcon position="absolute" marginLeft="20px" />
           <Input
@@ -65,6 +62,7 @@ function LoginForm() {
             {...register("password")}
           ></Input>
         </Flex>
+        <Text h={10} color="red" fontSize={"12"}>{errorAuth}</Text>
       </Grid>
       <Flex alignItems="center" justifyContent="space-between">
         <Stack

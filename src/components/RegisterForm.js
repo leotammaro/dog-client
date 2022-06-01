@@ -1,6 +1,6 @@
 import { Flex, Grid, Stack } from "@chakra-ui/layout";
 import React from "react";
-import { chakra } from "@chakra-ui/react";
+import { chakra,Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import { Button } from "@chakra-ui/button";
@@ -11,6 +11,7 @@ function RegisterForm() {
   const methods = useForm();
   const LinkCh = chakra(Link);
   const auth = getAuth();
+  const [errorRegister,setErrorRegister] = React.useState("")
 
   const createUser = (data) => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
@@ -22,6 +23,7 @@ function RegisterForm() {
       .catch((error) => {
         //const errorCode = error.code;
         const errorMessage = error.message;
+        setErrorRegister(errorMessage)
       });
   };
 
@@ -34,6 +36,7 @@ function RegisterForm() {
         <Grid templateColumns="1fr" rowGap="20px" marginBottom="20px">
           <InputRegister type="email" errors={methods.formState.errors} />
           <InputRegister type="password" errors={methods.formState.errors} />
+          <Text fontSize={12} color="red" h={10}>{errorRegister}</Text>
         </Grid>
         <Flex alignItems="center" justifyContent="space-between">
           <Stack

@@ -6,7 +6,7 @@ import MapContext from "../context/MapContext";
 import AnimalMapData from "./AnimalMapData";
 
 function Component() {
-  const { setCurrentBounds, mapCenter } = useContext(MapContext);
+  const { setCurrentBounds } = useContext(MapContext);
   const map = useMap();
 
   const setNewBouds = React.useCallback(() => {
@@ -19,30 +19,28 @@ function Component() {
       "center",
       `${map.getCenter().lat},${map.getCenter().lng}`
     );
+    localStorage.setItem("zoom",map.getZoom())
   }, [map, setCurrentBounds]);
 
   useMapEvent("moveend", setNewBouds);
 
+ 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      map.setView([position.coords.latitude, position.coords.longitude]);
-      setNewBouds();
-    });
+    const existingCenter = localStorage.getItem("center");
+    if (existingCenter) {
+      const existingZoom = localStorage.getItem("zoom")
+      const latlng = existingCenter.split(",");
+      map.setView([latlng[0], latlng[1]], existingZoom||12);
+  
+    }else{
+      navigator.geolocation.getCurrentPosition(function (position) {
+        map.setView([position.coords.latitude, position.coords.longitude]);
+        setNewBouds();
+      });
+    }
   }, [map, setNewBouds]);
 
-  useEffect(() => {
-    const exisingCenter = localStorage.getItem("center");
-    if (exisingCenter) {
-      const latlng = exisingCenter.split(",");
-      map.setView([latlng[0], latlng[1]], 12);
-    }
-  }, [map]);
-
-  useEffect(() => {
-    if (!!mapCenter.length) {
-      map.panTo(mapCenter, 12);
-    }
-  }, [mapCenter, map]);
+  
 
   return <></>;
 }
@@ -51,7 +49,7 @@ function Map({ results, hoverId }) {
   // eslint-disable-next-line no-unused-vars
 
   return (
-    <Box flex={{ base: "1", lg: "0.5" }} h="calc(100vh - 140px)">
+    <Box flex={{ base: "1", lg: "0.5" }} h={{base:"calc(100vh - 180px)",lg:"calc(100vh - 140px)"}}>
       <MapContainer
         center={[-34.6194586, -58.4510539]}
         zoom={12}

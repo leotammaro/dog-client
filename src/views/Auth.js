@@ -1,28 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Flex, Grid } from "@chakra-ui/layout";
 import { Image, Text } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/button";
 import logo from "../assets/logo.svg";
 import googleLogo from "../assets/googleLogo.svg";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { Redirect } from "react-router";
 
 function Auth({ children }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const singInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
     signInWithPopup(auth, provider)
-      .then((result) => {
-        setIsLoggedIn(true);
-      })
       .catch((error) => {
         console.warn(error);
       });
   };
-
-  if (isLoggedIn) return <Redirect to="/" />;
 
   return (
     <Flex height={{ base: "100vh" }} alignItems="center" w="100%">

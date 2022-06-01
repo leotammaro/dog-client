@@ -45,6 +45,7 @@ function Finder() {
       h={"100px"}
       justifyContent="flex-start"
       padding={5}
+      
     >
       <Flex position="relative" alignItems={"center"} h={50}>
         <Input

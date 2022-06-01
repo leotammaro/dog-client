@@ -19,8 +19,8 @@ function AnimalMapData({ reportResult, hoverId }) {
 
   const loadImage = React.useCallback(() => {
     if (reportResult)
-      addDownloadURL(reportResult.pet.photoURL).then(async (imageURL) => {
-        await setSrc(imageURL);
+      addDownloadURL(reportResult.pet.photoURL).then((imageURL) => {
+       setSrc(imageURL);
       }, []);
   }, [reportResult]);
 

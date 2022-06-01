@@ -4,6 +4,7 @@ import { addDownloadURL } from "../service/getImagesFromStorage";
 import moment from "moment";
 import deleteIcon from "../assets/delete.svg";
 import UserContext from "../context/UserContext";
+import animalsPhoto from "../assets/animalsPhoto.jpg"
 
 function AnimalResult({ petData, userName, setHoverId, onDelete }) {
   const [src, setSrc] = useState("");
@@ -18,7 +19,10 @@ function AnimalResult({ petData, userName, setHoverId, onDelete }) {
     addDownloadURL(petData.pet.photoURL).then(async (imageURL) => {
       setSrc(imageURL);
       setLoading(false);
-    });
+    }).catch(()=>
+    {setSrc(animalsPhoto)
+    setLoading(false);}
+    )
   }, [petData.pet.photoURL]);
 
   const handleMouseEnter = React.useCallback(() => {

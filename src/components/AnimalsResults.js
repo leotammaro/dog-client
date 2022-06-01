@@ -13,7 +13,7 @@ function AnimalsResults({ results, setHoverId }) {
       className="results-container"
       flex={{ base: "1", lg: "0.5" }}
       display={{ base: "none", lg: "flex" }}
-      wrap
+
     >
       {results?.length !== 0 ? (
         results?.map((dog, i) => {
