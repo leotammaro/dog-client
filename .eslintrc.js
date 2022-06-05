@@ -6,13 +6,13 @@ module.exports = {
   },
   extends: ["eslint:recommended", "plugin:react/recommended"],
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: "latest",
+    ecmaVersion: 6,
     sourceType: "module",
+    ecmaFeatures: {
+      modules: true,
+    },
   },
-  plugins: ["react"],
+  plugins: ["react", "react-hooks"],
   rules: {
     "react/prop-types": "off",
   },
