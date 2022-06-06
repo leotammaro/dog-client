@@ -2,14 +2,11 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
 } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { ChakraProvider, Spinner, Flex } from "@chakra-ui/react";
 import "./app.css";
 import Auth from "./views/Auth";
-import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
 import { getAuth } from "firebase/auth";
 import UserContext from "./context/UserContext";
 import Home from "./components/Home";
@@ -18,6 +15,9 @@ import Profile from "./components/Profile";
 import ReportDetail from "./components/ReportDetail";
 import axios from "axios";
 import theme from "./data/theme";
+import PrivateRoute from "./components/PrivateRoute";
+import LoginForm from "./components/LoginForm"
+import RegisterForm from "./components/RegisterForm"
 
 function App() {
   const [user, setUser] = useState({ isLoading: true, isLoggedIn: false });
@@ -56,38 +56,22 @@ function App() {
             ) : (
               <Switch>
                 <Route path="/login">
-                  {user.isLoggedIn ? (
-                    <Redirect to="/app" />
-                  ) : (
-                    <Auth>
-                      <LoginForm />
-                    </Auth>
-                  )}
+                  <Auth component={<LoginForm />} />
                 </Route>
                 <Route path="/register">
-                  {user.isLoggedIn ? (
-                    <Redirect to="/app" />
-                  ) : (
-                    <Auth>
-                      <RegisterForm />
-                    </Auth>
-                  )}
+                  <Auth component={<RegisterForm />} />
                 </Route>
                 <Route path="/app">
-                  {user.isLoggedIn ? <Home /> : <Redirect to="/login" />}
+                  <PrivateRoute><Home /></PrivateRoute>
                 </Route>
                 <Route path="/report/:id">
                   <ReportDetail />
                 </Route>
                 <Route path="/:userName">
-                  <Profile />
+                  <PrivateRoute><Profile /></PrivateRoute>
                 </Route>
                 <Route path="/">
-                  {user.isLoggedIn ? (
-                    <Redirect to="/app" />
-                  ) : (
-                    <Redirect to="/login" />
-                  )}
+                  <PrivateRoute><Home /></PrivateRoute>
                 </Route>
               </Switch>
             )}

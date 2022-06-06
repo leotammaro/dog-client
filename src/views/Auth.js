@@ -5,23 +5,34 @@ import { Button } from "@chakra-ui/button";
 import logo from "../assets/logo.svg";
 import googleLogo from "../assets/googleLogo.svg";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import dogImage from "../images/dogLogin.jpg";
+import { useHistory } from "react-router-dom";
+import UserContext from "../context/UserContext";
+import Home from "../components/Home.js";
+import { Redirect } from "react-router-dom";
 
-function Auth({ children }) {
+function Auth({ component }) {
+  const user = React.useContext(UserContext);
+  const history = useHistory();
   const singInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
     signInWithPopup(auth, provider)
+      .then(() => {
+        history.push("/app");
+      })
       .catch((error) => {
         console.warn(error);
       });
   };
-
-  return (
+  return user.isLoggedIn ? (
+    <Redirect component={<Home />} />
+  ) : (
     <Flex height={{ base: "100vh" }} alignItems="center" w="100%">
       <Grid templateColumns="2fr" flex="40%" justifyItems="center" h="100vh">
         <Image src={logo} w="60px" h="60px" alignSelf="flex-start" />
         <Box w="70%">
-          {children}
+          {component}
           <Flex direction="column" paddingTop="20px">
             <Text
               textAlign="center"
@@ -76,7 +87,7 @@ function Auth({ children }) {
         display={{ base: "none", lg: "block" }}
         minW="60%"
         h="100vh"
-        bgImage="https://www.hdnicewallpapers.com/Walls/Big/Dog/Beautiful_Dog_Puppy_4K_Wallpaper.jpg"
+        bgImage={dogImage}
         bgSize="cover"
         backgroundPosition="65%"
         backgroundRepeat="no-repeat"

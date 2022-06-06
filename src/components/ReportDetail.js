@@ -53,8 +53,8 @@ function ReportDetail() {
   useEffect(() => {
     if (reportData)
       addDownloadURL(reportData.pet.photoURL)
-        .then(async (imageURL) => {
-          await setSrc(imageURL);
+        .then((imageURL) => {
+          setSrc(imageURL);
         })
         .then(setLoading(false));
   }, [reportData]);

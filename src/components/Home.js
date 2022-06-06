@@ -1,4 +1,4 @@
-import { Flex} from "@chakra-ui/layout";
+import { Flex } from "@chakra-ui/layout";
 import React, { useEffect, useState } from "react";
 import Finder from "./Finder";
 import Map from "./Map";
@@ -13,7 +13,7 @@ function Home() {
   const [reportsResults, setReportsResults] = useState([]);
   const homeRef = React.useRef(null);
   const [hoverId, setHoverId] = React.useState("");
-  const [loading,setLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   const getReports = React.useCallback(() => {
     axios({
@@ -23,7 +23,7 @@ function Home() {
         upperRight: currentBounds[0]?.join(","),
         bottomLeft: currentBounds[1]?.join(","),
       },
-    }).then((response) => setReportsResults(response.data)).finally(()=> setLoading(false))
+    }).then((response) => setReportsResults(response.data)).finally(() => setLoading(false))
   }, [currentBounds, setReportsResults]);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function Home() {
         },
       }).then((response) => {
         setReportsResults(response.data);
-      }).finally(()=> setLoading(false))
+      }).finally(() => setLoading(false))
     } else {
       if (currentBounds.length !== 0) getReports();
     }
@@ -63,7 +63,7 @@ function Home() {
         <FormAnimalLost onSave={getReports} />
         <Finder results={reportsResults} />
         <Flex w="100%" ref={homeRef} h="100%" >
-          {loading ? <Flex flex={0.5} ></Flex>: <AnimalsResults results={reportsResults} setHoverId={setHoverId} />}
+          {loading ? <Flex flex={0.5} ></Flex> : <AnimalsResults results={reportsResults} setHoverId={setHoverId} />}
           <Map results={reportsResults} hoverId={hoverId} />
         </Flex>
       </Flex>
