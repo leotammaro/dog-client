@@ -26,20 +26,22 @@ function Navbar() {
 
   return (
     <Flex w="100%" justifyContent="space-between" padding={3} h={55}>
-      {location.pathname === "/app" ? (
-        <Image
-          src="https://iconape.com/wp-content/png_logo_vector/dog.png"
-          w={8}
-          h={8}
-        />
-      ) : (
-        <Link to="/">
+      {
+        location.pathname === "/app" ? (
           <Image
             src="https://iconape.com/wp-content/png_logo_vector/dog.png"
             w={8}
+            h={8}
           />
-        </Link>
-      )}
+        ) : (
+          <Link to="/">
+            <Image
+              src="https://iconape.com/wp-content/png_logo_vector/dog.png"
+              w={8}
+            />
+          </Link>
+        )
+      }
 
       <Flex alignItems="center" flex="0.1" justifyContent="space-between">
         {isLoggedIn && (
@@ -48,6 +50,7 @@ function Navbar() {
             borderRadius={10}
             mr={3}
             onClick={() => history.push("/app/new-report")}
+            fontSize={{ base: 12, lg: 16 }}
           >
             + Reportar Mascota
           </Button>
@@ -87,8 +90,8 @@ function Navbar() {
           )
         )}
       </Flex>
-    </Flex>
+    </Flex >
   );
 }
 
-export default Navbar;
+export default Navbar

@@ -4,7 +4,7 @@ import {
   Switch,
 } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { ChakraProvider, Spinner, Flex } from "@chakra-ui/react";
+import { ChakraProvider, Spinner } from "@chakra-ui/react";
 import "./app.css";
 import Auth from "./views/Auth";
 import { getAuth } from "firebase/auth";
@@ -44,41 +44,34 @@ function App() {
     <ChakraProvider colorModeManager={"cookie"} theme={theme}>
       <UserContext.Provider value={user}>
         <Router>
-          <Navbar />
-          <Flex
-            h="calc(100vh - 110px)"
-            w="100%"
-            alignItems="center"
-            justifyContent="center"
-          >
-            {user.isLoading ? (
-              <Spinner />
-            ) : (
-              <Switch>
-                <Route path="/login">
-                  <Auth component={<LoginForm />} />
-                </Route>
-                <Route path="/register">
-                  <Auth component={<RegisterForm />} />
-                </Route>
-                <Route path="/app">
-                  <PrivateRoute><Home /></PrivateRoute>
-                </Route>
-                <Route path="/report/:id">
-                  <ReportDetail />
-                </Route>
-                <Route path="/:userName">
-                  <PrivateRoute><Profile /></PrivateRoute>
-                </Route>
-                <Route path="/">
-                  <PrivateRoute><Home /></PrivateRoute>
-                </Route>
-              </Switch>
-            )}
-          </Flex>
+          {user.isLoggedIn && <Navbar />}
+          {user.isLoading ? (
+            <Spinner />
+          ) : (
+            <Switch>
+              <Route path="/login">
+                <Auth component={<LoginForm />} />
+              </Route>
+              <Route path="/register">
+                <Auth component={<RegisterForm />} />
+              </Route>
+              <Route path="/app">
+                <PrivateRoute><Home /></PrivateRoute>
+              </Route>
+              <Route path="/report/:id">
+                <ReportDetail />
+              </Route>
+              <Route path="/:userName">
+                <PrivateRoute><Profile /></PrivateRoute>
+              </Route>
+              <Route path="/">
+                <PrivateRoute><Home /></PrivateRoute>
+              </Route>
+            </Switch>
+          )}
         </Router>
       </UserContext.Provider>
-    </ChakraProvider>
+    </ChakraProvider >
   );
 }
 

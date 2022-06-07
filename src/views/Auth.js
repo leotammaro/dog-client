@@ -25,6 +25,7 @@ function Auth({ component }) {
         console.warn(error);
       });
   };
+  console.log(user.isLoggedIn)
   return user.isLoggedIn ? (
     <Redirect component={<Home />} />
   ) : (

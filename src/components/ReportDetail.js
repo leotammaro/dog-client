@@ -39,7 +39,6 @@ function ReportDetail() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  console.log(reportData);
 
   useEffect(() => {
     if (reportData) {
@@ -71,140 +70,145 @@ function ReportDetail() {
   return (
     <>
       {!loading && src !== "" ? (
-        <Stack
-          boxShadow={{ base: "", lg: "0px 0px 35px 2px rgba(0,0,0,0.15)" }}
-          direction={{ base: "column", lg: "row" }}
-          divider={<StackDivider />}
-          h={{ base: 700, lg: 500 }}
-          justifyContent="space-between"
-          padding={5}
-        >
-          <Image
-            src={src}
-            w={{ base: 400, md: 500, lg: 500 }}
-            objectFit="cover"
-            paddingRight={{ base: 0, lg: 10 }}
-          />
-          <Flex
-            direction={"column"}
-            alignItems="center"
-            justifyContent={"space-around"}
-            padding={{ base: 0, lg: 10 }}
-            textAlign="center"
-            gridGap={5}
-            marginTop={{ base: 10, lg: 0 }}
+        <Flex justifyContent={"center"} paddingTop={{ base: 10, lg: 20 }}>
+          <Stack
+            boxShadow={{ base: "", lg: "0px 0px 35px 2px rgba(0,0,0,0.15)" }}
+            direction={{ base: "column", lg: "row" }}
+            divider={<StackDivider />}
+            h={{ md: "100%", lg: 500 }}
+            w={{ base: "100%", md: 800, lg: 1000, xl: 1200 }}
+            justifyContent="space-around"
+            padding={5}
+            alignItems={{ base: "center", lg: "" }}
+
           >
-            <Text
-              alignSelf={"center"}
-              fontWeight="bold"
-              fontSize={16}
-              textTransform="uppercase"
-              paddingBottom={5}
-            >
-              Detalle del reporte
-            </Text>
+            <Image
+              src={src}
+              w={{ base: 280, md: 400, lg: 500 }}
+              objectFit="cover"
+              paddingRight={{ base: 0, lg: 10 }}
+            />
             <Flex
-              alignItems={"center"}
-              w="100%"
+              direction={"column"}
+              alignItems="center"
               justifyContent={"space-around"}
-              marginBottom={10}
+              padding={{ base: 0, lg: 10 }}
+              textAlign="center"
+              gridGap={5}
+              marginTop={{ base: 10, lg: 0 }}
             >
               <Text
-                textTransform="capitalize"
-                fontSize={18}
-                fontWeight="500"
-                flex={{ base: 1, lg: 0.4 }}
+                alignSelf={"center"}
+                fontWeight="bold"
+                fontSize={{ base: 14, lg: 16 }}
+                textTransform="uppercase"
+                paddingBottom={5}
               >
-                {reportData.pet.type} - {reportData.pet.breed}
+                Detalle del reporte
               </Text>
-              <Text flex={0.4} display={{ base: "none", lg: "block" }}>
-                {reportData.description}
+              <Flex
+                alignItems={"center"}
+                w="100%"
+                justifyContent={"space-around"}
+                marginBottom={10}
+              >
+                <Text
+                  textTransform="capitalize"
+                  fontSize={18}
+                  fontWeight="500"
+                  flex={{ base: 1, lg: 0.4 }}
+                >
+                  {reportData.pet.type} - {reportData.pet.breed}
+                </Text>
+                <Text flex={0.4} display={{ base: "none", lg: "block" }}>
+                  {reportData.description}
+                </Text>
+              </Flex>
+              <Flex direction={"column"} gridGap={4} w="100%">
+                <Flex justifyContent={"space-around"}>
+                  <Box flex={0.4}>
+                    <Text
+                      color={"gray.500"}
+                      fontWeight="600"
+                      textTransform={"uppercase"}
+                      fontSize={11}
+                    >
+                      Calle
+                    </Text>
+                    <Text fontSize={14}>{reportData.location.street}</Text>
+                  </Box>
+                  <Box flex={0.4}>
+                    <Text
+                      color={"gray.500"}
+                      fontWeight="600"
+                      textTransform={"uppercase"}
+                      fontSize={11}
+                    >
+                      Ciudad
+                    </Text>
+                    <Text
+                      fontSize={{ base: 14, lg: 20 }}
+                      textTransform="capitalize"
+                    >
+                      {reportData.location.city}
+                    </Text>
+                  </Box>
+                </Flex>
+                <Flex justifyContent={"space-around"}>
+                  <Box flex={0.4}>
+                    <Text
+                      color={"gray.500"}
+                      fontWeight="600"
+                      textTransform={"uppercase"}
+                      fontSize={11}
+                    >
+                      Tamaño
+                    </Text>
+                    <Text
+                      fontSize={{ base: 14, lg: 20 }}
+                      textTransform="capitalize"
+                    >
+                      {reportData.pet.size}
+                    </Text>
+                  </Box>
+                  <Box flex={0.4}>
+                    <Text
+                      color={"gray.500"}
+                      fontWeight="600"
+                      textTransform={"uppercase"}
+                      fontSize={11}
+                    >
+                      Genero
+                    </Text>
+                    <Text
+                      fontSize={{ base: 14, lg: 20 }}
+                      textTransform="capitalize"
+                    >
+                      {reportData.pet.gender}
+                    </Text>
+                  </Box>
+                </Flex>
+              </Flex>
+
+              <Text fontSize={{ base: 16, lg: 20 }} fontWeight="500">
+                Contactate!
               </Text>
-            </Flex>
-            <Flex direction={"column"} gridGap={4} w="100%">
-              <Flex justifyContent={"space-around"}>
-                <Box flex={0.4}>
-                  <Text
-                    color={"gray.500"}
-                    fontWeight="600"
-                    textTransform={"uppercase"}
-                    fontSize={11}
-                  >
-                    Calle
-                  </Text>
-                  <Text fontSize={14}>{reportData.location.street}</Text>
-                </Box>
-                <Box flex={0.4}>
-                  <Text
-                    color={"gray.500"}
-                    fontWeight="600"
-                    textTransform={"uppercase"}
-                    fontSize={11}
-                  >
-                    Ciudad
-                  </Text>
-                  <Text
-                    fontSize={{ base: 14, lg: 20 }}
-                    textTransform="capitalize"
-                  >
-                    {reportData.location.city}
-                  </Text>
-                </Box>
-              </Flex>
-              <Flex justifyContent={"space-around"}>
-                <Box flex={0.4}>
-                  <Text
-                    color={"gray.500"}
-                    fontWeight="600"
-                    textTransform={"uppercase"}
-                    fontSize={11}
-                  >
-                    Tamaño
-                  </Text>
-                  <Text
-                    fontSize={{ base: 14, lg: 20 }}
-                    textTransform="capitalize"
-                  >
-                    {reportData.pet.size}
-                  </Text>
-                </Box>
-                <Box flex={0.4}>
-                  <Text
-                    color={"gray.500"}
-                    fontWeight="600"
-                    textTransform={"uppercase"}
-                    fontSize={11}
-                  >
-                    Genero
-                  </Text>
-                  <Text
-                    fontSize={{ base: 14, lg: 20 }}
-                    textTransform="capitalize"
-                  >
-                    {reportData.pet.gender}
-                  </Text>
-                </Box>
+              <Flex w="100%" justifyContent={"center"} gridGap={8}>
+                <Tooltip hasArrow label={reportData.phoneNumber} fontSize="md">
+                  <a href={`tel:${reportData.phoneNumber}`}>
+                    <PhoneIcon />
+                  </a>
+                </Tooltip>
+
+                <Tooltip hasArrow label={userReportData.email} fontSize="md">
+                  <a href={`mailto:${userReportData.email}`}>
+                    <EmailIcon />
+                  </a>
+                </Tooltip>
               </Flex>
             </Flex>
-
-            <Text fontSize={{ base: 16, lg: 20 }} fontWeight="500">
-              Contactate!
-            </Text>
-            <Flex w="100%" justifyContent={"center"} gridGap={8}>
-              <Tooltip hasArrow label={reportData.phoneNumber} fontSize="md">
-                <a href={`tel:${reportData.phoneNumber}`}>
-                  <PhoneIcon />
-                </a>
-              </Tooltip>
-
-              <Tooltip hasArrow label={userReportData.email} fontSize="md">
-                <a href={`mailto:${userReportData.email}`}>
-                  <EmailIcon />
-                </a>
-              </Tooltip>
-            </Flex>
-          </Flex>
-        </Stack>
+          </Stack>
+        </Flex>
       ) : (
         <Spinner />
       )}
