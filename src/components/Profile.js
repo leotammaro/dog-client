@@ -59,7 +59,7 @@ function Profile() {
   }
 
   return (
-    <>
+    <Flex justifyContent={"center"} alignItems="center">
       {!loading && UserContext ? (
         <Flex direction={"column"} alignItems="center">
           {reportsByUser.length !== 0 ? (
@@ -84,7 +84,7 @@ function Profile() {
       ) : (
         <Spinner />
       )}
-    </>
+    </Flex>
   );
 }
 
