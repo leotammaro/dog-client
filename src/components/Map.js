@@ -47,7 +47,7 @@ function Map({ results, hoverId }) {
   return (
     <Box
       flex={{ base: "1", lg: "0.5" }}
-      h={{ base: "calc(100vh - 210px)", lg: "calc(100vh - 160px)" }}
+      h={"calc(100vh - 160px)"}
     >
       <MapContainer
         center={[-34.6194586, -58.4510539]}

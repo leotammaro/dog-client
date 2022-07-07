@@ -45,7 +45,7 @@ function Finder() {
       h={"100px"}
       justifyContent="flex-start"
       padding={5}
-      
+
     >
       <Flex position="relative" alignItems={"center"} h={50}>
         <Input
@@ -55,7 +55,7 @@ function Finder() {
           value={search}
           borderRadius="20px"
           fontSize={{ base: "12px", md: "16px" }}
-          w={400}
+          w={{ base: 360, lg: 400 }}
           paddingY={6}
           _focus={{ outline: "none" }}
         ></Input>
@@ -69,7 +69,7 @@ function Finder() {
           onClick={() => setFormResults(search)}
           color="white"
           position={"absolute"}
-          left={"345px"}
+          left={{ base: "308px", lg: "345px" }}
         >
           <SearchIcon h="15px" boxSizing="content-box" />
         </Button>
