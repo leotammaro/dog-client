@@ -20,7 +20,7 @@ function AnimalMapData({ reportResult, hoverId }) {
   const loadImage = React.useCallback(() => {
     if (reportResult)
       addDownloadURL(reportResult.pet.photoURL).then((imageURL) => {
-       setSrc(imageURL);
+        setSrc(imageURL);
       }, []);
   }, [reportResult]);
 
@@ -40,7 +40,7 @@ function AnimalMapData({ reportResult, hoverId }) {
             <Popup onOpen={loadImage}>
               <Box w={150} _hover={{ cursor: "pointer" }}>
                 {!src ? <Spinner /> : <Image src={src} objectFit="contain" />}
-                <Text fontSize={20} textTransform={"capitalize"}>
+                <Text fontSize={16}>
                   {reportResult.description}
                 </Text>
               </Box>

@@ -6,10 +6,11 @@ import MapContext from "../context/MapContext";
 import AnimalMapData from "./AnimalMapData";
 
 function Component() {
-  const { setCurrentBounds } = useContext(MapContext);
+  const { mapCenter, setCurrentBounds } = useContext(MapContext);
   const map = useMap();
+  map.doubleClickZoom.disable();
 
-  const setNewBouds = React.useCallback(() => {
+  const setNewBounds = React.useCallback(() => {
     const { _northEast, _southWest } = map.getBounds();
     setCurrentBounds([
       [_northEast.lat, _northEast.lng],
@@ -22,7 +23,13 @@ function Component() {
     localStorage.setItem("zoom", map.getZoom());
   }, [map, setCurrentBounds]);
 
-  useMapEvent("moveend", setNewBouds);
+  useEffect(() => {
+    if (mapCenter.length !== 0) {
+      map.setView([mapCenter[0], mapCenter[1]]);
+    }
+  }, [mapCenter])
+
+  useMapEvent("moveend", setNewBounds);
 
   useEffect(() => {
     const existingCenter = localStorage.getItem("center");
@@ -33,17 +40,15 @@ function Component() {
     } else {
       navigator.geolocation.getCurrentPosition(function (position) {
         map.setView([position.coords.latitude, position.coords.longitude]);
-        setNewBouds();
+        setNewBounds();
       });
     }
-  }, [map, setNewBouds]);
+  }, [map, setNewBounds]);
 
   return <></>;
 }
 
 function Map({ results, hoverId }) {
-  // eslint-disable-next-line no-unused-vars
-
   return (
     <Box
       flex={{ base: "1", lg: "0.5" }}

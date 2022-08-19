@@ -1,5 +1,6 @@
 export const breeds = {
-  dog: [
+  Perro: [
+    "Indefinida",
     "Affenpinscher",
     "Afghan Hound",
     "Aidi",
@@ -454,7 +455,8 @@ export const breeds = {
     "Yorkshire Terrier",
     "Šarplaninac",
   ],
-  cat: [
+  Gato: [
+    "Indefinida",
     "Abyssinian",
     "Aegean",
     "American Bobtail",

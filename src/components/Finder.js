@@ -32,12 +32,6 @@ function Finder() {
     if (formResults !== "") setCords();
   }, [formResults]);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      setMapCenter([position.coords.latitude, position.coords.longitude]);
-    });
-  }, []);
-
   return (
     <Flex
       direction="column"

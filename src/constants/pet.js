@@ -1,44 +1,44 @@
 export const types = {
-  dog: "Dog",
-  cat: "Cat",
+  Perro: "Perro",
+  Gato: "Gato",
 };
 
 export const colors = {
-  black: "Black",
-  white: "White",
-  blue: "Blue",
+  black: "Negro",
+  white: "Blanco",
+  blue: "Azul",
   brindle: "Brindle",
-  brown: "Brown",
-  green: "Green",
-  orange: "Orange",
-  other: "Other",
-  rustOrReddish: "Rust or reddish",
-  silverOrGray: "Silver or gray",
-  tanOrCream: "Tan or cream",
-  yellowOrGolden: "Yellow or golden",
+  brown: "Marron",
+  green: "Verde",
+  orange: "Naranja",
+  other: "Otro",
+  rustOrReddish: "Rojizo",
+  silverOrGray: "Plateado o gris",
+  tanOrCream: "Crema",
+  yellowOrGolden: "Amarillo o dorado",
 };
 
 export const genders = {
-  female: "Female",
-  male: "Male",
-  unknown: "Unknown",
+  female: "Hembra",
+  male: "Macho",
+  unknown: "Desconozco",
 };
 
 export const sizes = {
-  small: "Small",
-  medium: "Medium",
-  large: "Large",
+  small: "Pequeño",
+  medium: "Mediano",
+  large: "Grande",
 };
 
 export const weights = {
-  lessThan10: "Less than 10kg",
-  lessThan30: "Less than 30kg",
-  lessThan50: "Less than 50kg",
-  moreThan50: "More than 50kg",
+  lessThan10: "Menos de 10kg",
+  lessThan30: "Menos de 30kg",
+  lessThan50: "Menos de 50kg",
+  moreThan50: "Mas de 50kg",
 };
 
 export const ages = {
-  between1And3: "Between 1 and 3 years",
-  between3And6: "Between 3 and 6 years",
-  moreThan6: "More than 6",
+  between1And3: "Aparenta entre 1 y 3 años",
+  between3And6: "Aparenta entre 3 y 6 años",
+  moreThan6: "Aparenta mas de 6 años",
 };

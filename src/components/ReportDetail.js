@@ -68,7 +68,7 @@ function ReportDetail() {
   }
 
   return (
-    <>
+    <Flex justifyContent={"center"}>
       {!loading && src !== "" ? (
         <Flex justifyContent={"center"} paddingTop={{ base: 10, lg: 20 }}>
           <Stack
@@ -195,7 +195,7 @@ function ReportDetail() {
               </Text>
               <Flex w="100%" justifyContent={"center"} gridGap={8}>
                 <Tooltip hasArrow label={reportData.phoneNumber} fontSize="md">
-                  <a href={`tel:${reportData.phoneNumber}`}>
+                  <a href={`https://api.whatsapp.com/send/?phone=54${reportData.phoneNumber}`}>
                     <PhoneIcon />
                   </a>
                 </Tooltip>
@@ -212,7 +212,7 @@ function ReportDetail() {
       ) : (
         <Spinner />
       )}
-    </>
+    </Flex>
   );
 }
 export default ReportDetail;

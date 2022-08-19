@@ -30,11 +30,11 @@ function FormAnimalLost({ onSave }) {
   const selectedType = watch("tipo");
   const location = useLocation();
   const history = useHistory();
-
+  console.log(selectedType?.value)
   React.useEffect(() => {
     setIsOpen(location.pathname === "/app/new-report");
   }, [location]);
-
+  console.log(selectedType)
   const onSubmit = async (data) => {
     setIsLoading(true);
     const {
@@ -298,9 +298,8 @@ function FormAnimalLost({ onSave }) {
                   <Input
                     value={value || ""}
                     onChange={onChange}
-                    placeholder={`Dirección donde encontraste al ${
-                      selectedType?.value || "animal"
-                    }`}
+                    placeholder={`Dirección donde encontraste al ${selectedType?.value || "animal"
+                      }`}
                     fontSize="12px"
                     textOverflow={"ellipsis"}
                   />
@@ -332,9 +331,9 @@ function FormAnimalLost({ onSave }) {
                 field: { value, onChange },
                 fieldState: { error },
               }) => (
-                <Field error={error?.message} label="Telefono">
+                <Field error={error?.message} label="Celular">
                   <Input
-                    placeholder="Telefono"
+                    placeholder="Celular donde contactarse"
                     value={value || ""}
                     onChange={onChange}
                     fontSize={12}
